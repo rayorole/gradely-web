@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Companies() {
   return (
-    <div className="py-24 sm:py-32">
+    <div className="py-12 bg-muted">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold leading-8">
           Trusted by the world&apos;s most innovative teams
