@@ -5,7 +5,7 @@ import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
 export default function Modules() {
   return (
-    <div className="my-40 scroll-smooth" id="services">
+    <div className="my-40" id="services">
       <h1 className="mt-6 mb-12 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-100 text-center">
         It&apos;s not only about grades
         <span className="text-zinc-500">, Right?</span>

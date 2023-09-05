@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
-import { DarkModeToggle } from "@/components/darkmode";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import NavMenu from "./menu";
 
 export default function Navbar() {
   return (
@@ -19,7 +19,7 @@ export default function Navbar() {
             <span className="text-xl font-bold">Gradely</span>
           </a>
         </div>
-        <div className="flex items-center space-x-6 text-sm font-medium">
+        {/* <div className="flex items-center space-x-6 text-sm font-medium">
           <a
             href="/"
             className="transition-colors hover:text-foreground/80 text-foreground/60"
@@ -38,13 +38,18 @@ export default function Navbar() {
           >
             Contact
           </a>
-        </div>
+        </div> */}
+        <NavMenu />
         <div className="flex items-center space-x-2">
-          <DarkModeToggle />
           <Button variant="ghost" asChild>
             <Link href="/login" className="flex items-center">
               <span>Login</span>
               <ArrowRightOnRectangleIcon className="h-4 w-4 ml-2" />
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/signup" className="flex items-center">
+              <span>Sign up</span>
             </Link>
           </Button>
         </div>

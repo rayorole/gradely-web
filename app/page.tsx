@@ -5,11 +5,10 @@ import Footer from "@/components/landing/footer";
 import Hero from "@/components/landing/hero";
 import Modules from "@/components/landing/modules";
 import Navbar from "@/components/navbar/navbar";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Navbar />
       <div className="container">
         <Hero />
@@ -19,6 +18,6 @@ export default function Home() {
         <Cta />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
