@@ -40,7 +40,7 @@ export default function Hero() {
 
         <div className="mt-6 flex space-x-3">
           <Button asChild>
-            <Link href="/login">Login with your school</Link>
+            <Link href="/signin">Sign in with your school</Link>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

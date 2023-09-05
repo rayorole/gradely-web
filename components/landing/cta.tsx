@@ -15,11 +15,11 @@ export default function Cta() {
 
       <div className="flex justify-center space-x-2">
         <Button asChild>
-          <Link href="/login">Create an account</Link>
+          <Link href="/signin">Create an account</Link>
         </Button>
         <Button asChild variant="link">
-          <Link href="/login">
-            Login
+          <Link href="/signin">
+            Sign in
             <ArrowLongRightIcon className="h-4 w-4 ml-2" />
           </Link>
         </Button>

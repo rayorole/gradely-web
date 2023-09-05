@@ -25,7 +25,7 @@ export default function Modules() {
               </p>
 
               <Button variant="link" asChild className="pl-0">
-                <Link href="/login">
+                <Link href="/signin">
                   Explore
                   <ArrowLongRightIcon className="h-4 w-4 ml-2" />
                 </Link>
@@ -62,7 +62,7 @@ export default function Modules() {
               </p>
 
               <Button variant="link" asChild className="pl-0">
-                <Link href="/login">
+                <Link href="/signin">
                   Explore
                   <ArrowLongRightIcon className="h-4 w-4 ml-2" />
                 </Link>
@@ -99,7 +99,7 @@ export default function Modules() {
               </p>
 
               <Button variant="link" asChild className="pl-0">
-                <Link href="/login">
+                <Link href="/signin">
                   Explore
                   <ArrowLongRightIcon className="h-4 w-4 ml-2" />
                 </Link>

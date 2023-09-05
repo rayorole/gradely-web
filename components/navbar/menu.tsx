@@ -21,7 +21,7 @@ const integrations: { title: string; href: string; description: string }[] = [
     title: "Smartschool",
     href: "/docs/integrations/smartschool",
     description:
-      "Login with your Smartschool account and view your grades and assignments.",
+      "Sign in with your Smartschool account and view your grades and assignments.",
   },
   {
     title: "Mail",
@@ -33,7 +33,7 @@ const integrations: { title: string; href: string; description: string }[] = [
     title: "Microsoft",
     href: "/docs/integrations/microsoft",
     description:
-      "Login with your Microsoft account and view your grades and assignments.",
+      "Sign in with your Microsoft account and view your grades and assignments.",
   },
 ];
 

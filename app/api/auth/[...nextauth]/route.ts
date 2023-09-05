@@ -2,6 +2,9 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import { createTransport } from "nodemailer";
+
+import { magicLinkHtml, magicLinkText } from "@/lib/mail";
 
 const prisma = new PrismaClient();
 
@@ -10,8 +13,30 @@ const authOptions: NextAuthOptions = {
     EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
+
+      sendVerificationRequest: async (params) => {
+        const { identifier, url, provider } = params;
+        const { host } = new URL(url);
+
+        const transport = createTransport(provider.server);
+        const result = await transport.sendMail({
+          to: identifier,
+          from: provider.from,
+          subject: `Sign in to Gradely`,
+          text: magicLinkText({ url, host }),
+          html: magicLinkHtml({ url }),
+        });
+        const failed = result.rejected.concat(result.pending).filter(Boolean);
+        if (failed.length) {
+          throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
+        }
+      },
     }),
   ],
+
+  pages: {
+    signIn: "/signin",
+  },
 
   adapter: PrismaAdapter(prisma),
 };

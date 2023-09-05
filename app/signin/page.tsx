@@ -4,12 +4,12 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "@/components/login/user-auth-form";
-import Quote from "@/components/login/quote";
+import { UserAuthForm } from "@/components/signin/user-auth-form";
+import Quote from "@/components/signin/quote";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Sign in | Gradely",
+  description: "Sign in to your Gradely account",
 };
 
 export default function AuthenticationPage() {
@@ -17,13 +17,13 @@ export default function AuthenticationPage() {
     <>
       <div className="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <Link
-          href="/examples/authentication"
+          href="/"
           className={cn(
             buttonVariants({ variant: "ghost" }),
             "absolute right-4 top-4 md:right-8 md:top-8"
           )}
         >
-          Login
+          Go back
         </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex dark:border-zinc-700 dark:border-dashed">
           <div
@@ -55,10 +55,10 @@ export default function AuthenticationPage() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Create an account
+                Welcome to Gradely
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email below to create your account
+                Enter your school email below to continue.
               </p>
             </div>
             <UserAuthForm />
