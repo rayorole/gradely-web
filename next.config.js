@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "www.notion.so",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "gradely.be",
+        port: "",
+      },
     ],
   },
 };
