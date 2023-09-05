@@ -27,10 +27,10 @@ export default function Navbar() {
             Home
           </a>
           <a
-            href="/"
+            href="#services"
             className="transition-colors hover:text-foreground/80 text-foreground/60"
           >
-            About
+            Services
           </a>
           <a
             href="/"

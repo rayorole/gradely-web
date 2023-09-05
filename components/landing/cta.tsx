@@ -4,7 +4,7 @@ import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
 export default function Cta() {
   return (
-    <div className="text-center">
+    <div className="text-center mb-72">
       <h1 className="my-2 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-100 text-center">
         Create your account today
       </h1>
