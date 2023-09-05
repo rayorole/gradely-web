@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -21,6 +22,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     email: "",
   });
   const [success, setSuccess] = useState(false);
+  const params = useSearchParams();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,19 +49,58 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
   };
 
+  const signInMicrosoft = async () => {
+    try {
+      setLoading(true);
+
+      const res = await signIn("azure-ad", {
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      setLoading(false);
+
+      if (!res?.error) {
+        // router.push("/");
+      } else {
+        console.log(res.error);
+      }
+    } catch (error: any) {
+      setLoading(false);
+      setError(error);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // Check if there is a ?error= query param
+    if (params.has("error")) {
+      switch (params.get("error")) {
+        case "OAuthAccountNotLinked":
+          setError("This email is already in use by another account.");
+          break;
+
+        default:
+          setError("An unknown error occurred.");
+          break;
+      }
+    }
+  }, [params]);
+
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={onSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
+            <Label htmlFor="email" className="text-red-500">
+              {error}
             </Label>
             <Input
               id="email"
               placeholder="john.doe@school.com"
               type="email"
               autoCapitalize="none"
+              name="email"
               autoComplete="email"
               autoCorrect="off"
               disabled={loading}
@@ -119,20 +160,41 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={loading}>
-        {loading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Image
-            src="/assets/smartschool.png"
-            width={16}
-            height={16}
-            className="mr-2"
-            alt="Smartschool"
-          />
-        )}{" "}
-        Smartschool
-      </Button>
+      <div className="flex-col flex gap-2">
+        <Button variant="outline" type="button" disabled={loading}>
+          {loading ? (
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Image
+              src="/assets/smartschool.png"
+              width={16}
+              height={16}
+              className="mr-2"
+              alt="Smartschool"
+            />
+          )}{" "}
+          Smartschool
+        </Button>
+        <Button
+          variant="outline"
+          type="button"
+          disabled={loading}
+          onClick={signInMicrosoft}
+        >
+          {loading ? (
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Image
+              src="/assets/microsoft.png"
+              width={16}
+              height={16}
+              className="mr-2"
+              alt="Smartschool"
+            />
+          )}
+          Microsoft
+        </Button>
+      </div>
     </div>
   );
 }
