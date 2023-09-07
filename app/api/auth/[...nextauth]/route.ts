@@ -7,7 +7,7 @@ import { createTransport } from "nodemailer";
 
 import { magicLinkHtml, magicLinkText } from "@/lib/mail";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
       server: process.env.EMAIL_SERVER,
@@ -46,6 +46,7 @@ const authOptions: NextAuthOptions = {
   },
 
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);

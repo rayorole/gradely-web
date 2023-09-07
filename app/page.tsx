@@ -5,11 +5,15 @@ import Footer from "@/components/landing/footer";
 import Hero from "@/components/landing/hero";
 import Modules from "@/components/landing/modules";
 import Navbar from "@/components/navbar/navbar";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   return (
     <div>
-      <Navbar />
+      <Navbar session={session} />
       <div className="container">
         <Hero />
         <Companies />
