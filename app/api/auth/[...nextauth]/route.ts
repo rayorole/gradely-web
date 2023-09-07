@@ -1,13 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { createTransport } from "nodemailer";
 
 import { magicLinkHtml, magicLinkText } from "@/lib/mail";
-
-const prisma = new PrismaClient();
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -22,13 +20,15 @@ const authOptions: NextAuthOptions = {
         const transport = createTransport(provider.server);
         const result = await transport.sendMail({
           to: identifier,
-          from: provider.from,
+          from: `Gradely <${provider.from}>`,
           subject: `Sign in to Gradely`,
           text: magicLinkText({ url, host }),
           html: magicLinkHtml({ url }),
         });
+
         const failed = result.rejected.concat(result.pending).filter(Boolean);
-        if (failed.length) {
+
+        if (failed.length > 0) {
           throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
         }
       },
