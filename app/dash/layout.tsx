@@ -21,7 +21,7 @@ export default async function DashLayout({
   }
 
   return (
-    <section>
+    <main className="h-screen">
       <div className="border-b sticky top-0 bg-white shadow-sm z-[999]">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
@@ -35,6 +35,6 @@ export default async function DashLayout({
 
       <Suspense fallback={<Loading />}>{children}</Suspense>
       <Toaster />
-    </section>
+    </main>
   );
 }

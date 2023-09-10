@@ -19,7 +19,7 @@ const categories = [
   },
 ];
 
-export default function Dash() {
+export default async function Dash() {
   return (
     <>
       <main className="p-5 lg:p-8">
