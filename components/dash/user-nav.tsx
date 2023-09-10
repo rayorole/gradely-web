@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export function UserNav(props: { session: Session | null | undefined }) {
   async function handleSignOut() {
@@ -53,9 +54,11 @@ export function UserNav(props: { session: Session | null | undefined }) {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
 
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          <DropdownMenuItem asChild>
+            <Link href="/dash/settings">
+              Settings
+              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

@@ -5,6 +5,7 @@ import { UserNav } from "@/components/dash/user-nav";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function DashLayout({
   children, // will be a page or nested layout
@@ -19,7 +20,7 @@ export default async function DashLayout({
 
   return (
     <section>
-      <div className="border-b">
+      <div className="border-b sticky top-0 bg-white shadow-sm">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
           <MainNav className="mx-6" />
@@ -31,6 +32,7 @@ export default async function DashLayout({
       </div>
 
       {children}
+      <Toaster />
     </section>
   );
 }

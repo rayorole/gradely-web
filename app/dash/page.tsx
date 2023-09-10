@@ -1,3 +1,6 @@
+import AverageGradeClassStudent from "@/components/dash/charts/avg-grade-class";
+import DatePicker from "@/components/dash/date-picker";
+import RecentGradesTable from "@/components/dash/tables/recent-grades";
 import {
   Card,
   Grid,
@@ -8,51 +11,52 @@ import {
   TabGroup,
   TabPanel,
   TabPanels,
+  Flex,
+  Metric,
+  BadgeDelta,
+  ProgressBar,
+  DeltaType,
 } from "@tremor/react";
+import Link from "next/link";
+
+const categories = [
+  {
+    title: "Average grade",
+    metric: "76%",
+  },
+  {
+    title: "Class average",
+    metric: "65%",
+  },
+  {
+    title: "Total grades",
+    metric: "85",
+  },
+];
 
 export default function Dash() {
   return (
     <>
-      <main className="container">
-        <Title>Dashboard</Title>
-        <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+      <main className="p-5 lg:p-8">
+        <div className="flex justify-between items-center">
+          <Title>Overview</Title>
+          <DatePicker />
+        </div>
 
-        <TabGroup className="mt-6">
-          <TabList>
-            <Tab>Page 1</Tab>
-            <Tab>Page 2</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
-                <Card>
-                  {/* Placeholder to set height */}
-                  <div className="h-28" />
-                </Card>
-                <Card>
-                  {/* Placeholder to set height */}
-                  <div className="h-28" />
-                </Card>
-                <Card>
-                  {/* Placeholder to set height */}
-                  <div className="h-28" />
-                </Card>
-              </Grid>
-              <div className="mt-6">
-                <Card>
-                  <div className="h-80" />
-                </Card>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className="mt-6">
-                <Card>
-                  <div className="h-96" />
-                </Card>
-              </div>
-            </TabPanel>
-          </TabPanels>
-        </TabGroup>
+        <Text>All of Gradely in a glance.</Text>
+
+        <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
+          {categories.map((item) => (
+            <Card key={item.title}>
+              <Text>{item.title}</Text>
+              <Metric>{item.metric}</Metric>
+            </Card>
+          ))}
+        </Grid>
+        <Grid numItemsMd={1} numItemsLg={2} className="gap-6 mt-6">
+          <AverageGradeClassStudent />
+          <RecentGradesTable />
+        </Grid>
       </main>
     </>
   );
