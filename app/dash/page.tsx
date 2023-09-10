@@ -1,7 +1,3 @@
-import { MainNav } from "@/components/dash/main-nav";
-import { Search } from "@/components/dash/search";
-import TeamSwitcher from "@/components/dash/team-switcher";
-import { UserNav } from "@/components/dash/user-nav";
 import {
   Card,
   Grid,
@@ -17,17 +13,6 @@ import {
 export default function Dash() {
   return (
     <>
-      <div className="border-b">
-        <div className="flex h-16 items-center px-4">
-          <TeamSwitcher />
-          <MainNav className="mx-6" />
-          <div className="ml-auto flex items-center space-x-4">
-            <Search />
-            <UserNav />
-          </div>
-        </div>
-      </div>
-
       <main className="container">
         <Title>Dashboard</Title>
         <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
