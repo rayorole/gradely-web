@@ -11,8 +11,9 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Session } from "next-auth";
 
-export default function Hero() {
+export default function Hero(props: { session: Session | null | undefined }) {
   return (
     <div className="my-12 flex items-center">
       <div>
@@ -39,9 +40,16 @@ export default function Hero() {
         </p>
 
         <div className="mt-6 flex space-x-3">
-          <Button asChild>
-            <Link href="/signin">Sign in with your school</Link>
-          </Button>
+          {props.session ? (
+            <Button asChild>
+              <Link href="/dash">Go to Dashboard</Link>
+            </Button>
+          ) : (
+            <Button asChild>
+              <Link href="/signin">Sign in with your school</Link>
+            </Button>
+          )}
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">

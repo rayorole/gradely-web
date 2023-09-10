@@ -54,3 +54,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model School {
+  id             String  @id @default(cuid())
+  name           String
+  domain         String  @unique
+  smartschool_id String? @unique
+}
