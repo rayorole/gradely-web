@@ -1,23 +1,8 @@
+import AllGradesStudent from "@/components/dash/charts/all-grades-student";
 import AverageGradeClassStudent from "@/components/dash/charts/avg-grade-class";
 import DatePicker from "@/components/dash/date-picker";
 import RecentGradesTable from "@/components/dash/tables/recent-grades";
-import {
-  Card,
-  Grid,
-  Title,
-  Text,
-  Tab,
-  TabList,
-  TabGroup,
-  TabPanel,
-  TabPanels,
-  Flex,
-  Metric,
-  BadgeDelta,
-  ProgressBar,
-  DeltaType,
-} from "@tremor/react";
-import Link from "next/link";
+import { Card, Grid, Title, Text, Metric } from "@tremor/react";
 
 const categories = [
   {
@@ -56,6 +41,9 @@ export default function Dash() {
         <Grid numItemsMd={1} numItemsLg={2} className="gap-6 mt-6">
           <AverageGradeClassStudent />
           <RecentGradesTable />
+        </Grid>
+        <Grid className="mt-6">
+          <AllGradesStudent />
         </Grid>
       </main>
     </>

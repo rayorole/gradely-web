@@ -6,9 +6,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default async function DashLayout({
-  children, // will be a page or nested layout
+  children,
 }: {
   children: React.ReactNode;
 }) {
@@ -20,7 +22,7 @@ export default async function DashLayout({
 
   return (
     <section>
-      <div className="border-b sticky top-0 bg-white shadow-sm">
+      <div className="border-b sticky top-0 bg-white shadow-sm z-[999]">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
           <MainNav className="mx-6" />
@@ -31,7 +33,7 @@ export default async function DashLayout({
         </div>
       </div>
 
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
       <Toaster />
     </section>
   );
