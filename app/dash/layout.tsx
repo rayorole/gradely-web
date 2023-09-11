@@ -1,6 +1,6 @@
 import { MainNav } from "@/components/dash/main-nav";
 import { Search } from "@/components/dash/search";
-import TeamSwitcher from "@/components/dash/team-switcher";
+import TeamSwitcher from "@/components/dash/dash-logo";
 import { UserNav } from "@/components/dash/user-nav";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
