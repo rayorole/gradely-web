@@ -48,3 +48,44 @@
     --ring: 240 4.9% 83.9%;
   }
 }
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-container {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  place-content: center;
+  overflow: hidden;
+}
+
+.loading-svg {
+  width: 50%;
+  overflow: visible;
+  fill: black;
+  cursor: pointer;
+}
+
+.loading-brackets {
+  stroke: black;
+  stroke-width: 160;
+  fill: transparent;
+  stroke-linecap: square;
+}
+
+.loading-stroke {
+  fill: white;
+}
+
+.loading-logo-example {
+  width: 75px;
+}

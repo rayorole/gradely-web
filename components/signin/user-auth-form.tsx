@@ -54,7 +54,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       const res = await signIn("email", {
         redirect: false,
         email: formValues.email,
-        callbackUrl: "/",
+        callbackUrl: "/dash",
       });
 
       setLoading(false);

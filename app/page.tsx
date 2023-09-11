@@ -15,7 +15,7 @@ export default async function Home() {
     <div>
       <Navbar session={session} />
       <div className="container">
-        <Hero />
+        <Hero session={session} />
         <Companies />
         <Modules />
         <Features />
