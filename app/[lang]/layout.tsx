@@ -2,6 +2,7 @@ import { i18nConfig, Locale } from "@/i18n.config";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,15 +12,12 @@ export const metadata: Metadata = {
   icons: [
     {
       rel: "icon",
-      href: "/assets/gradely.png",
-      url: "/assets/gradely.png",
-    },
-    {
-      rel: "icon",
       href: "/assets/gradely-white.png",
       url: "/assets/gradely-white.png",
     },
   ],
+  manifest: "/manifest.json",
+  themeColor: "#ffffff",
 };
 
 export async function generateStaticParams() {
