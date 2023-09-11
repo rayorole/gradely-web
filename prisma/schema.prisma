@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum GradeType {
+  EXAM
+  TEST
+  HOMEWORK
+  OTHER
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -61,4 +68,13 @@ model School {
   name           String
   domain         String  @unique
   smartschool_id String? @unique
+}
+
+model Grade {
+  id         String    @id @default(cuid())
+  title      String
+  comment    String?
+  percentage Int?
+  created_at DateTime  @default(now())
+  type       GradeType @default(TEST)
 }

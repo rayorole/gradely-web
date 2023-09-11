@@ -22,7 +22,7 @@ export default async function DashLayout({
 
   return (
     <main className="h-screen">
-      <div className="border-b sticky top-0 bg-white shadow-sm z-[999]">
+      <div className="border-b sticky top-0 bg-white shadow-sm z-[998]">
         <div className="flex h-16 items-center px-4">
           <TeamSwitcher />
           <MainNav className="mx-6" />

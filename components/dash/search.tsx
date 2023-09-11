@@ -21,7 +21,7 @@ export function Search() {
   return (
     <>
       <Button
-        className="md:w-[100px] lg:w-[200px] flex justify-between text-muted-foreground"
+        className="md:w-[100px] lg:w-[200px] flex justify-between text-muted-foreground z-[999]"
         variant="outline"
         onClick={() => setOpen(!open)}
       >
