@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import NavMenu from "./menu";
 import { Session } from "next-auth";
+import { LangPicker } from "./lang-picker";
 
 export default function Navbar(props: { session: Session | null | undefined }) {
   return (
@@ -26,6 +27,7 @@ export default function Navbar(props: { session: Session | null | undefined }) {
 
         <NavMenu />
         <div className="flex items-center space-x-2">
+          <LangPicker />
           <Button variant="ghost" asChild>
             {props.session ? (
               <Link href="/dash" className="flex items-center">
