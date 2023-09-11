@@ -1,0 +1,11 @@
+{
+  "landing": {
+    "hero": {
+      "title": "Gérez vos notes facilement",
+      "subtitle": "Gradely offre une manière simple et intuitive de gérer les notes et les devoirs, que vous soyez enseignant ou étudiant.",
+      "action_button_logged_in": "Accéder au tableau de bord",
+      "action_button_logged_out": "Commencer",
+      "download_button": "Télécharger l'application"
+    }
+  }
+}

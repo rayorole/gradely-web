@@ -1,0 +1,11 @@
+{
+  "landing": {
+    "hero": {
+      "title": "Manage grades with ease",
+      "subtitle": "Gradely offers a simple and intuitive way to manage grades and assignments for teachers and students alike.",
+      "action_button_logged_in": "Go to dashboard",
+      "action_button_logged_out": "Get started",
+      "download_button": "Download the app"
+    }
+  }
+}

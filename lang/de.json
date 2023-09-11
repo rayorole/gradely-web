@@ -1,0 +1,11 @@
+{
+  "landing": {
+    "hero": {
+      "title": "Noten leicht verwalten",
+      "subtitle": "Gradely bietet Lehrern und Schülern eine einfache und intuitive Möglichkeit, Noten und Aufgaben zu verwalten.",
+      "action_button_logged_in": "Zum Dashboard gehen",
+      "action_button_logged_out": "Loslegen",
+      "download_button": "Die App herunterladen"
+    }
+  }
+}

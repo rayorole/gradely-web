@@ -12,8 +12,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Session } from "next-auth";
+import { Dictionary } from "@/lib/dictionary";
 
-export default function Hero(props: { session: Session | null | undefined }) {
+export default function Hero(props: {
+  session: Session | null | undefined;
+  dict: Dictionary;
+}) {
   return (
     <div className="my-12 flex items-center">
       <div>
@@ -32,7 +36,7 @@ export default function Hero(props: { session: Session | null | undefined }) {
           <ArrowRightIcon className="h-4 w-4 ml-2" />
         </a>
         <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1] my-2">
-          Manage grades with ease.
+          {props.dict.landing.hero.title}
         </h1>
         <p className="text-lg font-medium max-w-[750px] text-muted-foreground sm:text-xl">
           Gradely offers a simple and intuitive interface to manage your

@@ -28,7 +28,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log("Sending...");
 
       const rateLimitRes = await fetch(
         `/api/signin/ratelimit?identifier=${formValues.email}`,
@@ -37,10 +36,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         }
       );
 
-      console.log(rateLimitRes.ok);
-
       if (!rateLimitRes.ok) {
-        console.log(rateLimitRes.status);
         if (rateLimitRes.status === 429) {
           setError("Too many requests, please try again later.");
         } else {

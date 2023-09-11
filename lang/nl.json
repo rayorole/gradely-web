@@ -1,0 +1,11 @@
+{
+  "landing": {
+    "hero": {
+      "title": "Beheer cijfers eenvoudig",
+      "subtitle": "Gradely biedt docenten en studenten een eenvoudige en intuïtieve manier om cijfers en opdrachten te beheren.",
+      "action_button_logged_in": "Ga naar dashboard",
+      "action_button_logged_out": "Aan de slag",
+      "download_button": "De app downloaden"
+    }
+  }
+}

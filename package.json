@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.0.2",
+    "@formatjs/intl-localematcher": "^0.4.2",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.1",
     "@prisma/client": "^5.2.0",
@@ -43,6 +44,7 @@
     "framer-motion": "^10.16.4",
     "i18next": "^23.4.6",
     "ioredis": "^5.3.2",
+    "negotiator": "^0.6.3",
     "next": "13.4.19",
     "next-auth": "^4.23.1",
     "next-i18next": "^14.0.3",
@@ -64,6 +66,7 @@
   "author": "Ray Orolé <orole.ray@protonmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/negotiator": "^0.6.1",
     "@types/nodemailer": "^6.4.9",
     "prisma": "^5.2.0"
   }
