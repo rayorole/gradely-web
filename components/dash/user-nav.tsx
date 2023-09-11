@@ -107,8 +107,9 @@ export function UserNav(props: { session: Session | null | undefined }) {
                 href="https://rayorole.github.io"
                 className="hover:underline"
               >
-                Ray
-              </Link>
+                Ray Orole
+              </Link>{" "}
+              &#64; Campus Sint Ursula, Lier
             </p>
           </div>
           <Separator className="my-4" />
@@ -138,7 +139,7 @@ export function UserNav(props: { session: Session | null | undefined }) {
             <Separator orientation="vertical" />
             <div>
               <Link
-                href="https://github.com/rayorole/gradely-web/LICENSE"
+                href="https://github.com/rayorole/gradely-web/blob/dev/LICENSE"
                 className="hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
