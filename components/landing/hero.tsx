@@ -13,6 +13,16 @@ import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Session } from "next-auth";
 import { Dictionary } from "@/lib/dictionary";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Icons } from "../icons";
 
 export default function Hero(props: {
   session: Session | null | undefined;
@@ -53,35 +63,53 @@ export default function Hero(props: {
               <Link href="/signin">Sign in with your school</Link>
             </Button>
           )}
+          <Dialog>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  Download the app
+                  <ChevronDownIcon className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-40">
+                <DialogTrigger asChild>
+                  <DropdownMenuItem className="flex justify-between items-center">
+                    IOS App
+                    <Image
+                      src="/assets/apple-logo.png"
+                      width={16}
+                      height={16}
+                      alt="IOS"
+                    />
+                  </DropdownMenuItem>
+                </DialogTrigger>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline">
-                Download the app
-                <ChevronDownIcon className="h-4 w-4 ml-2" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-40">
-              <DropdownMenuItem className="flex justify-between items-center">
-                IOS App
-                <Image
-                  src="/assets/apple-logo.png"
-                  width={16}
-                  height={16}
-                  alt="IOS"
-                />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex justify-between items-center">
-                Android App
-                <Image
-                  src="/assets/android-logo.png"
-                  width={16}
-                  height={16}
-                  alt="IOS"
-                />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                <DropdownMenuItem className="flex justify-between items-center">
+                  Android App
+                  <Image
+                    src="/assets/android-logo.png"
+                    width={16}
+                    height={16}
+                    alt="IOS"
+                  />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Install Gradely on IOS</DialogTitle>
+                <DialogDescription>
+                  Install this application on your home screen for a better
+                  experience.
+                </DialogDescription>
+              </DialogHeader>
+              <small className="text-sm font-medium leading-none flex items-center">
+                Tap <Icons.share className="mx-1 h-1 w-1" /> and &quot;Add to
+                Homescreen &quot;
+              </small>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="hidden lg:block">
