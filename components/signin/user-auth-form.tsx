@@ -28,6 +28,28 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     e.preventDefault();
     try {
       setLoading(true);
+      console.log("Sending...");
+
+      const rateLimitRes = await fetch(
+        `/api/signin/ratelimit?identifier=${formValues.email}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      console.log(rateLimitRes.ok);
+
+      if (!rateLimitRes.ok) {
+        console.log(rateLimitRes.status);
+        if (rateLimitRes.status === 429) {
+          setError("Too many requests, please try again later.");
+        } else {
+          setError("An unknown error occurred.");
+        }
+
+        setLoading(false);
+        return;
+      }
 
       const res = await signIn("email", {
         redirect: false,
@@ -38,10 +60,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       setLoading(false);
 
       if (!res?.error) {
+        const rateLimitRes = await fetch(`/api/signin/ratelimit`, {
+          method: "POST",
+          body: JSON.stringify({
+            identifier: formValues.email,
+          }),
+        });
+
+        if (!rateLimitRes.ok) {
+          setError("An unknown error occurred.");
+
+          setLoading(false);
+          return;
+        }
+
         setSuccess(true);
         setFormValues({ email: "" });
+        setError(null);
       } else {
-        setError("invalid email");
+        setError("Invalid email");
       }
     } catch (error: any) {
       setLoading(false);
@@ -102,6 +139,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               name="email"
               autoComplete="email"
+              required
               autoCorrect="off"
               disabled={loading}
               value={formValues.email}
