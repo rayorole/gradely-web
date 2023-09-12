@@ -20,6 +20,10 @@ export default async function DashLayout({
     redirect("/signin");
   }
 
+  if (session.user.role === "ADMIN") {
+    redirect("/admin");
+  }
+
   return (
     <main className="h-screen">
       <div className="border-b sticky top-0 bg-white shadow-sm z-[998]">

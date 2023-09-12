@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/signin",
+    signOut: "/signout",
   },
 
   callbacks: {
@@ -51,8 +52,8 @@ export const authOptions: NextAuthOptions = {
       // Add property role from User model to the session
       // @ts-ignore
       session.user = { ...session.user, role: user.role } as User;
-      return session
-    }
+      return session;
+    },
   },
 
   adapter: PrismaAdapter(prisma),
