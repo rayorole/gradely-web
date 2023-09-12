@@ -27,15 +27,16 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
-const profileFormSchema = z.object({
-  username: z
+const GeneralFormSchema = z.object({
+  school: z
     .string()
     .min(2, {
-      message: "Username must be at least 2 characters.",
+      message: "School must be at least 2 characters.",
     })
-    .max(30, {
-      message: "Username must not be longer than 30 characters.",
+    .max(70, {
+      message: "Username must not be longer than 70 characters.",
     }),
+  website: z.string().url({ message: "Please enter a valid URL." }),
   email: z
     .string({
       required_error: "Please select an email to display.",
@@ -51,10 +52,10 @@ const profileFormSchema = z.object({
     .optional(),
 });
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+type GeneralFormValues = z.infer<typeof GeneralFormSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
+const defaultValues: Partial<GeneralFormValues> = {
   bio: "I own a computer.",
   urls: [
     { value: "https://shadcn.com" },
@@ -62,9 +63,9 @@ const defaultValues: Partial<ProfileFormValues> = {
   ],
 };
 
-export function ProfileForm() {
-  const form = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileFormSchema),
+export function GeneralForm() {
+  const form = useForm<GeneralFormValues>({
+    resolver: zodResolver(GeneralFormSchema),
     defaultValues,
     mode: "onChange",
   });
@@ -74,7 +75,7 @@ export function ProfileForm() {
     control: form.control,
   });
 
-  function onSubmit(data: ProfileFormValues) {
+  function onSubmit(data: GeneralFormValues) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -90,16 +91,33 @@ export function ProfileForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="school"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>School name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="School" {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
+                This is the name that will be displayed on user dashboards and
+                profiles across the site.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="website"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>School website</FormLabel>
+              <FormControl>
+                <Input placeholder="school.campus.edu" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is the URL that will be displayed on user dashboards and
+                profiles across the site.
               </FormDescription>
               <FormMessage />
             </FormItem>

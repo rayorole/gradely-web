@@ -6,7 +6,7 @@ import Hero from "@/components/landing/hero";
 import Modules from "@/components/landing/modules";
 import Navbar from "@/components/navbar/navbar";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/i18n.config";
 

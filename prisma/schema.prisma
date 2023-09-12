@@ -75,6 +75,7 @@ model School {
   id             String  @id @default(cuid())
   name           String
   domain         String  @unique
+  website        String?
   smartschool_id String? @unique
 }
 

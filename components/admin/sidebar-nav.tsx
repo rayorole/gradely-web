@@ -23,6 +23,10 @@ export default function SidebarNav() {
       title: "Classes",
       href: `/${lang}/admin/classes`,
     },
+    {
+      title: "Administrators",
+      href: `/${lang}/admin/administrators`,
+    },
   ];
 
   return (

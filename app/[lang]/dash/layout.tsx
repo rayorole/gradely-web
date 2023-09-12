@@ -3,7 +3,7 @@ import { Search } from "@/components/dash/search";
 import TeamSwitcher from "@/components/dash/dash-logo";
 import { UserNav } from "@/components/dash/user-nav";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Suspense } from "react";

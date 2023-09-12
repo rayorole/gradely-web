@@ -1,7 +1,7 @@
 import Footer from "@/components/landing/footer";
 import Navbar from "@/components/navbar/navbar";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/i18n.config";
 import ContactForm from "@/components/contact/contact-form";

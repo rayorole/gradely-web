@@ -1,17 +1,17 @@
 import { Separator } from "@/components/ui/separator";
-import { ProfileForm } from "@/components/dash/settings/profile-form";
+import { GeneralForm } from "@/components/admin/general-form";
 
-export default function SettingsProfilePage() {
+export default function AdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">Profile</h3>
+        <h3 className="text-lg font-medium">General</h3>
         <p className="text-sm text-muted-foreground">
-          This is how others will see you on the site.
+          Configure general settings for your school.
         </p>
       </div>
       <Separator />
-      <ProfileForm />
+      <GeneralForm />
     </div>
   );
 }
