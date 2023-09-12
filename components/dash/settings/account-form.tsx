@@ -212,6 +212,7 @@ export function AccountForm() {
             </FormItem>
           )}
         />
+
         <Button type="submit">Update account</Button>
       </form>
     </Form>

@@ -17,6 +17,13 @@ enum GradeType {
   OTHER
 }
 
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+  COACCOUNT
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -51,6 +58,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  role          UserRole  @default(STUDENT)
   accounts      Account[]
   sessions      Session[]
 }

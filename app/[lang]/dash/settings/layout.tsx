@@ -5,14 +5,14 @@ import { Separator } from "@/components/ui/separator";
 import SidebarNav from "@/components/dash/settings/sidebar-nav";
 
 export const metadata: Metadata = {
-  title: "Forms",
-  description: "Advanced form example using react-hook-form and Zod.",
+  title: "Gradely | Settings",
+  description: "Manage your profile, account, and notifications settings.",
 };
 
 const sidebarNavItems = [
   {
     title: "Profile",
-    href: "/dash/settings",
+    href: `/dash/settings/`,
   },
   {
     title: "Account",
@@ -25,6 +25,10 @@ const sidebarNavItems = [
   {
     title: "Notifications",
     href: "/dash/settings/notifications",
+  },
+  {
+    title: "Co accounts",
+    href: "/dash/settings/co-accounts",
   },
 ];
 

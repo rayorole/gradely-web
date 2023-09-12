@@ -1,0 +1,14 @@
+-- AlterTable
+ALTER TABLE `User` ADD COLUMN `role` ENUM('STUDENT', 'TEACHER', 'ADMIN') NOT NULL DEFAULT 'STUDENT';
+
+-- CreateTable
+CREATE TABLE `Grade` (
+    `id` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(191) NOT NULL,
+    `comment` VARCHAR(191) NULL,
+    `percentage` INTEGER NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `type` ENUM('EXAM', 'TEST', 'HOMEWORK', 'OTHER') NOT NULL DEFAULT 'TEST',
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

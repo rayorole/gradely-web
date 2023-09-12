@@ -1,9 +1,10 @@
-import NextAuth, { NextAuthOptions, User } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import { createTransport } from "nodemailer";
+import type { Session, User } from "@prisma/client";
 
 import { magicLinkHtml, magicLinkText } from "@/lib/mail";
 
@@ -43,6 +44,15 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/signin",
+  },
+
+  callbacks: {
+    async session({ session, token, user }) {
+      // Add property role from User model to the session
+      // @ts-ignore
+      session.user = { ...session.user, role: user.role } as User;
+      return session
+    }
   },
 
   adapter: PrismaAdapter(prisma),
