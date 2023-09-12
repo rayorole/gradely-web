@@ -1,16 +1,19 @@
 import Image from "next/image";
 
-export default function Footer() {
+export default function Footer({ withSvg = true }) {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-zinc-100 dark:bg-transparent relative border">
-      <Image
-        src="/assets/undraw-cta.svg"
-        alt="Gradient"
-        width={400}
-        height={300}
-        className="absolute -top-[266px] right-0 left-1/2 transform -translate-x-1/2"
-      />
+      {withSvg && (
+        <Image
+          src="/assets/undraw-cta.svg"
+          alt="Gradient"
+          width={400}
+          height={300}
+          className="absolute -top-[266px] right-0 left-1/2 transform -translate-x-1/2"
+        />
+      )}
+
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center text-teal-600">
           <Image

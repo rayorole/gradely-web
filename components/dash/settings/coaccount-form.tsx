@@ -18,39 +18,55 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const coAccountFormSchema = z.object({
-  coaccounts: z
-    .array(
-      z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
-      })
-    )
-    .optional(),
+const items = [
+  {
+    id: "grades",
+    label: "Grades",
+  },
+  {
+    id: "reports",
+    label: "Reports",
+  },
+  {
+    id: "letters",
+    label: "Letters",
+  },
+  {
+    id: "parental-contact",
+    label: "Parental contact",
+  },
+] as const;
+
+const FormSchema = z.object({
+  permissions: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "You have to select at least one item.",
+    }),
+  name: z.string().nonempty("Name is required."),
+  email: z.string().email("Invalid email address."),
 });
 
-type AccountFormValues = z.infer<typeof coAccountFormSchema>;
-
 export function CoAccountForm() {
-  const form = useForm<AccountFormValues>({
-    resolver: zodResolver(coAccountFormSchema),
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      permissions: ["grades", "reports", "letters", "parental-contact"],
+    },
   });
 
-  function onSubmit(data: AccountFormValues) {
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log("Hey");
     toast({
       title: "You submitted the following values:",
       description: (
@@ -61,65 +77,120 @@ export function CoAccountForm() {
     });
   }
 
-  const { fields, append } = useFieldArray({
-    name: "coaccounts",
-    control: form.control,
-  });
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div>
-          {fields.map((field, index) => (
-            <FormField
-              control={form.control}
-              key={field.id}
-              name={`coaccounts.${index}.value`}
-              render={({ field }) => (
-                <FormItem {...field} className="my-3">
-                  <FormLabel>Co account {index + 1}</FormLabel>
-                  <FormDescription>
-                    Enter the details of your co account.
-                  </FormDescription>
-
-                  <div className="grid w-full items-center gap-4">
-                    <div className="flex flex-col space-y-1.5">
-                      <Input id="email" placeholder="Enter email" />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Select>
-                        <SelectTrigger id="framework">
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent position="popper">
-                          <SelectItem value="next">Next.js</SelectItem>
-                          <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                          <SelectItem value="astro">Astro</SelectItem>
-                          <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          ))}
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2"
-            onClick={() => append({ value: "" })}
-          >
+    <div>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button type="button" variant="outline" size="sm" className="mt-2">
             Add co account
             <PlusCircleIcon className="w-4 h-4 ml-2" />
           </Button>
-        </div>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <DialogHeader>
+                <DialogTitle>Add co account</DialogTitle>
+                <DialogDescription>
+                  Enter the details of your co account.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid w-full items-center gap-2">
+                <div className="flex flex-col space-y-0.5">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Enter email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex flex-col space-y-0.5">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Enter name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div>
+                  <div className="my-4">
+                    <FormField
+                      control={form.control}
+                      name="permissions"
+                      render={() => (
+                        <FormItem>
+                          <div className="mb-4">
+                            <FormLabel className="text-base">
+                              Permissions
+                            </FormLabel>
+                            <FormDescription>
+                              Select the permissions you want to grant to your
+                              co account.
+                            </FormDescription>
+                          </div>
+                          {items.map((item) => (
+                            <FormField
+                              key={item.id}
+                              control={form.control}
+                              name="permissions"
+                              render={({ field }) => {
+                                return (
+                                  <FormItem
+                                    key={item.id}
+                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={field.value?.includes(item.id)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([
+                                                ...field.value,
+                                                item.id,
+                                              ])
+                                            : field.onChange(
+                                                field.value?.filter(
+                                                  (value) => value !== item.id
+                                                )
+                                              );
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="text-sm font-normal">
+                                      {item.label}
+                                    </FormLabel>
+                                  </FormItem>
+                                );
+                              }}
+                            />
+                          ))}
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
 
-        <Button type="submit">Update co accounts</Button>
-      </form>
-    </Form>
+              <DialogFooter>
+                <Button type="submit">Add co account</Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }

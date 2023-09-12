@@ -9,29 +9,6 @@ export const metadata: Metadata = {
   description: "Manage your profile, account, and notifications settings.",
 };
 
-const sidebarNavItems = [
-  {
-    title: "Profile",
-    href: `/dash/settings/`,
-  },
-  {
-    title: "Account",
-    href: "/dash/settings/account",
-  },
-  {
-    title: "Appearance",
-    href: "/dash/settings/appearance",
-  },
-  {
-    title: "Notifications",
-    href: "/dash/settings/notifications",
-  },
-  {
-    title: "Co accounts",
-    href: "/dash/settings/co-accounts",
-  },
-];
-
 interface SettingsLayoutProps {
   children: React.ReactNode;
 }
@@ -65,7 +42,7 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
         <Separator className="my-6" />
         <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
           <aside className="-mx-4 lg:w-1/5">
-            <SidebarNav items={sidebarNavItems} />
+            <SidebarNav />
           </aside>
           <div className="flex-1 lg:max-w-2xl">{children}</div>
         </div>
