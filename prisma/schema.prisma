@@ -53,14 +53,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
-  role          UserRole  @default(STUDENT)
+  role          UserRole   @default(STUDENT)
   accounts      Account[]
   sessions      Session[]
+  settings      Settings[]
 }
 
 model VerificationToken {
@@ -86,4 +87,14 @@ model Grade {
   percentage Int?
   created_at DateTime  @default(now())
   type       GradeType @default(TEST)
+}
+
+model Settings {
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  key        String   @unique
+  value      Json
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
