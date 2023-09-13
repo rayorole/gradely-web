@@ -1,4 +1,4 @@
-import Companies from "@/components/landing/companies";
+import Schools from "@/components/landing/schools";
 import Cta from "@/components/landing/cta";
 import Features from "@/components/landing/features";
 import Footer from "@/components/landing/footer";
@@ -9,6 +9,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/i18n.config";
+import Pricing from "@/components/landing/pricing";
 
 export default async function Home({
   params: { lang },
@@ -25,9 +26,10 @@ export default async function Home({
       <Navbar session={session} />
       <div className="container">
         <Hero session={session} dict={translation} />
-        <Companies />
+        <Schools />
         <Modules />
         <Features />
+        {/* <Pricing /> */}
         <Cta />
       </div>
       <Footer />
