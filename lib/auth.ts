@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         const { host } = new URL(url);
 
         const transport = createTransport(provider.server);
+
         const result = await transport.sendMail({
           to: identifier,
           from: `Gradely <${provider.from}>`,
@@ -40,6 +41,22 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
       tenantId: process.env.AZURE_AD_TENANT_ID!,
     }),
+
+    // Custom Smartschool provider
+    {
+      id: "smartschool",
+      name: "Smartschool",
+      type: "oauth",
+      version: "2.0",
+      profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      }
+    }
   ],
 
   pages: {
