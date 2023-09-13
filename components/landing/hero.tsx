@@ -53,7 +53,7 @@ export default function Hero(props: {
           students grades. Accessible from anywhere, anytime.
         </p>
 
-        <div className="mt-6 flex space-x-3">
+        <div className="mt-6 flex gap-3 flex-col sm:flex-row ">
           {props.session ? (
             <Button asChild>
               <Link href="/dash">Go to Dashboard</Link>
@@ -71,7 +71,7 @@ export default function Hero(props: {
                   <ChevronDownIcon className="h-4 w-4 ml-2" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-40">
+              <DropdownMenuContent>
                 <DialogTrigger asChild>
                   <DropdownMenuItem className="flex justify-between items-center">
                     IOS App
