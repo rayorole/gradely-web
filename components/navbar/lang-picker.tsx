@@ -39,7 +39,7 @@ const langs = [
   },
 ];
 
-export function LangPicker() {
+export function LangPicker({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const { lang } = useParams();
@@ -60,7 +60,7 @@ export function LangPicker() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[180px] justify-between"
+          className={cn("w-[180px] justify-between", className)}
         >
           {value
             ? langs.find((lang) => lang.value === value)?.label
@@ -68,7 +68,7 @@ export function LangPicker() {
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[180px] p-0">
+      <PopoverContent className={cn("w-full p-0", className)}>
         <Command>
           <CommandInput placeholder="Search lang..." className="h-9" />
           <CommandEmpty>No language found.</CommandEmpty>

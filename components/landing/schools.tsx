@@ -1,14 +1,29 @@
 import Image from "next/image";
 
-export default function Companies() {
+export default function Schools() {
   return (
     <div className="py-12 bg-muted">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold leading-8">
-          Trusted by the world&apos;s most innovative teams
+          The perfect tool for schools and institutions
         </h2>
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-          <Image
+          <div className="col-span-2 max-h-12 w-full object-contain lg:col-span-1">
+            xxx
+          </div>
+          <div className="col-span-2 max-h-12 w-full object-contain lg:col-span-1">
+            xxx
+          </div>
+          <div className="col-span-2 max-h-12 w-full object-contain lg:col-span-1">
+            xxx
+          </div>
+          <div className="col-span-2 max-h-12 w-full object-contain lg:col-span-1">
+            xxx
+          </div>
+          <div className="col-span-2 max-h-12 w-full object-contain lg:col-span-1">
+            xxx
+          </div>
+          {/* <Image
             className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
             src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg"
             alt="Transistor"
@@ -42,7 +57,7 @@ export default function Companies() {
             alt="Statamic"
             width={158}
             height={48}
-          />
+          /> */}
         </div>
       </div>
     </div>
