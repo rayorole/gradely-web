@@ -1,12 +1,12 @@
 import { MainNav } from "@/components/dash/main-nav";
 import { Search } from "@/components/dash/search";
-import TeamSwitcher from "@/components/dash/dash-logo";
 import { UserNav } from "@/components/dash/user-nav";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Suspense } from "react";
+import TeamSwitcher from "@/components/dash/dash-logo";
 import Loading from "./loading";
 
 export default async function DashLayout({
@@ -18,9 +18,9 @@ export default async function DashLayout({
 
   if (!session) {
     redirect("/signin");
-  }
-
-  if (session.user.role === "ADMIN") {
+  } else if (session.user.role === "TEACHER") {
+    redirect("/dash/teacher");
+  } else if (session.user.role === "ADMIN") {
     redirect("/admin");
   }
 

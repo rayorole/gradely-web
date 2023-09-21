@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/i18n.config";
-import Pricing from "@/components/landing/pricing";
+// import Pricing from "@/components/landing/pricing";
 
 export default async function Home({
   params: { lang },
