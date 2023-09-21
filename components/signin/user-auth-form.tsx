@@ -27,6 +27,24 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     try {
       setLoading(true);
 
+      const whitelistRes = await fetch(
+        `/api/signin/whitelist?identifier=${formValues.email}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!whitelistRes.ok) {
+        if (whitelistRes.status === 404) {
+          setError("This school is not registered with us.");
+        } else {
+          setError("An unknown error occurred.");
+        }
+
+        setLoading(false);
+        return;
+      }
+
       const rateLimitRes = await fetch(
         `/api/signin/ratelimit?identifier=${formValues.email}`,
         {
@@ -72,6 +90,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         setFormValues({ email: "" });
         setError(null);
       } else {
+        console.log(res.error);
         setError("Invalid email");
       }
     } catch (error: any) {

@@ -58,10 +58,12 @@ model User {
   email         String?    @unique
   emailVerified DateTime?
   image         String?
+  classId       String?
   role          UserRole   @default(STUDENT)
   accounts      Account[]
   sessions      Session[]
   settings      Settings[]
+  class         Class?     @relation(fields: [classId], references: [id])
 }
 
 model VerificationToken {
@@ -78,6 +80,17 @@ model School {
   domain         String  @unique
   website        String?
   smartschool_id String? @unique
+  classes        Class[]
+}
+
+model Class {
+  id         String   @id @default(cuid())
+  name       String
+  schoolId   String
+  created_at DateTime @default(now())
+
+  students User[]
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 }
 
 model Grade {

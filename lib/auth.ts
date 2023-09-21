@@ -5,6 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import { createTransport } from "nodemailer";
 import type { User } from "@prisma/client";
+import extractDomain from 'extract-domain';
 
 import { magicLinkHtml, magicLinkText } from "@/lib/mail";
 
@@ -16,6 +17,7 @@ export const authOptions: NextAuthOptions = {
 
       sendVerificationRequest: async (params) => {
         const { identifier, url, provider } = params;
+
         const { host } = new URL(url);
 
         const transport = createTransport(provider.server);

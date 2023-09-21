@@ -39,7 +39,7 @@ export function MainNav({
         href="/dash/parental-contact"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Parental Contact
+        Parental contact
       </Link>
     </nav>
   );
