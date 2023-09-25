@@ -1,9 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { UserGroupIcon } from "@heroicons/react/24/outline";
 import {
   Dialog,
   DialogContent,
@@ -27,6 +26,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ApiJsonResponse } from "@/types/api";
+import { ToastAction } from "@/components/ui/toast";
+import CoAccounts from "./coaccounts";
+import { User } from "@prisma/client";
+import { useState } from "react";
 
 const items = [
   {
@@ -57,7 +61,8 @@ const FormSchema = z.object({
   email: z.string().email("Invalid email address."),
 });
 
-export function CoAccountForm() {
+export function CoAccountForm({ coAccounts }: { coAccounts?: User[] }) {
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -65,25 +70,53 @@ export function CoAccountForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("Hey");
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    // Submit data to /api/settings/coaccount via POST request
+    const res = await fetch("/api/settings/coaccount", {
+      method: "POST",
+      body: JSON.stringify(data),
     });
+
+    // Check if the response is ok
+    if (!res.ok) {
+      toast({
+        title: "Error!",
+        description: "Something went wrong.",
+        variant: "destructive",
+        action: <ToastAction altText="Close this modal">Close</ToastAction>,
+      });
+    }
+
+    // If the response is ok, get the JSON data
+    const body: ApiJsonResponse = await res.json();
+
+    if (body.error) {
+      toast({
+        title: "Error!",
+        description: body.message,
+        variant: "destructive",
+        action: <ToastAction altText="Close this modal">Close</ToastAction>,
+      });
+    }
+
+    toast({
+      title: "Success!",
+      description: body.message,
+      variant: "default",
+      action: <ToastAction altText="Close this modal">Close</ToastAction>,
+    });
+
+    setOpen(false);
+    window.location.reload();
   }
 
   return (
     <div>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button type="button" variant="outline" size="sm" className="mt-2">
+          <Button type="button" variant="outline" size="sm" className="my-2">
             Add co account
-            <PlusCircleIcon className="w-4 h-4 ml-2" />
+            <UserGroupIcon className="w-4 h-4 ml-2" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
@@ -191,6 +224,8 @@ export function CoAccountForm() {
           </Form>
         </DialogContent>
       </Dialog>
+
+      <CoAccounts coAccounts={coAccounts} />
     </div>
   );
 }

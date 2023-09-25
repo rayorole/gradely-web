@@ -5,7 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import { createTransport } from "nodemailer";
 import type { User } from "@prisma/client";
-import extractDomain from 'extract-domain';
+import extractDomain from "extract-domain";
 
 import { magicLinkHtml, magicLinkText } from "@/lib/mail";
 
@@ -57,8 +57,8 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
           image: profile.picture,
         };
-      }
-    }
+      },
+    },
   ],
 
   pages: {
@@ -70,7 +70,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token, user }) {
       // Add property role from User model to the session
       // @ts-ignore
-      session.user = { ...session.user, role: user.role } as User;
+      session.user = { ...session.user, role: user.role, id: user.id } as User;
       return session;
     },
   },

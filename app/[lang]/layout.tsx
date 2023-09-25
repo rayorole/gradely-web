@@ -9,13 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Gradely",
   description: "Use Gradely to view your school grades and assignments.",
-  icons: [
-    {
-      rel: "icon",
-      href: "/assets/gradely-white.png",
-      url: "/assets/gradely-white.png",
-    },
-  ],
+  icons: {
+    icon: "/assets/gradely-white.png",
+  },
   manifest: "/manifest.json",
   themeColor: "#ffffff",
 };
