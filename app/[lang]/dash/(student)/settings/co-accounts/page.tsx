@@ -15,8 +15,6 @@ export default async function SettingsCoAccountPage() {
     },
   });
 
-  console.log(coAccounts);
-
   return (
     <div>
       <div className="mb-6">

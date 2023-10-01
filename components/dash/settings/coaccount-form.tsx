@@ -93,10 +93,12 @@ export function CoAccountForm({ coAccounts }: { coAccounts?: User[] }) {
     if (body.error) {
       toast({
         title: "Error!",
-        description: body.message,
+        description: body.error,
         variant: "destructive",
         action: <ToastAction altText="Close this modal">Close</ToastAction>,
       });
+
+      return;
     }
 
     toast({
@@ -119,6 +121,7 @@ export function CoAccountForm({ coAccounts }: { coAccounts?: User[] }) {
             <UserGroupIcon className="w-4 h-4 ml-2" />
           </Button>
         </DialogTrigger>
+
         <DialogContent className="sm:max-w-[425px]">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

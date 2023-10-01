@@ -1,5 +1,5 @@
+"use client";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +17,33 @@ import {
 } from "@/components/ui/popover";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { User } from "@prisma/client";
+import { ApiJsonResponse } from "@/types/api";
+import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function CoAccounts({ coAccounts }: { coAccounts?: User[] }) {
+  const deleteCoAccount = async (coAccount: User) => {
+    const res = await fetch("/api/settings/coaccount", {
+      method: "DELETE",
+      body: JSON.stringify({
+        id: coAccount.id,
+      }),
+    });
+
+    const data = (await res.json()) as ApiJsonResponse;
+
+    if (data.error) {
+      toast({
+        title: "Error!",
+        description: "Something went wrong.",
+        variant: "destructive",
+        action: <ToastAction altText="Close this modal">Close</ToastAction>,
+      });
+      return;
+    }
+
+    window.location.reload();
+  };
   return (
     <>
       {coAccounts?.map((coAccount, idx) => (
@@ -87,12 +112,30 @@ export default function CoAccounts({ coAccounts }: { coAccounts?: User[] }) {
               </PopoverContent>
             </Popover>
 
-            <Button variant="outline" size="icon">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => {
+                deleteCoAccount(coAccount);
+              }}
+            >
               <TrashIcon className="h-4 w-4 text-red-400" />
             </Button>
           </div>
         </div>
       ))}
+
+      {coAccounts?.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-20">
+          <p className="text-lg font-medium text-center">
+            You don&apos;t have any co accounts yet.
+          </p>
+          <p className="text-sm text-muted-foreground text-center">
+            Co accounts are useful for sharing your account with other people
+            without having to share your password.
+          </p>
+        </div>
+      )}
     </>
   );
 }
