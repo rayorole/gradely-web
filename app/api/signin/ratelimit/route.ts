@@ -7,7 +7,9 @@ export async function GET(req: Request) {
   const identifier = searchParams.get("identifier");
 
   try {
-    const redis = new Redis();
+    const redis = new Redis(
+      process.env.REDIS_URL!
+    );
     const result = await redis.get(`magic_link:${identifier}`);
 
     if (result) {
