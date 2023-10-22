@@ -7,7 +7,7 @@
 Gradely offers a simple and intuitive interface to manage your
 students grades. Accessible from anywhere, anytime.
 
-> This project is still under development
+> This project is under development
 
 ## Installation
 

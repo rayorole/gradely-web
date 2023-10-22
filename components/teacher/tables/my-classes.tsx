@@ -1,8 +1,8 @@
+"use client";
 import {
   Card,
   Title,
   Text,
-  Flex,
   Table,
   TableRow,
   TableCell,
