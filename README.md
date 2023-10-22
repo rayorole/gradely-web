@@ -2,7 +2,7 @@
     <img src="./public/assets/gradely-white.png" alt="Gradely" />
 </center>
 
-# Gradelysss
+# Gradely
 
 Gradely offers a simple and intuitive interface to manage your
 students grades. Accessible from anywhere, anytime.
